@@ -4,6 +4,8 @@ Fecha Modificacion: 07/07/2018
 Archivo JS
 ******************************/
 var $$ = Dom7;
+var pictureSource;
+var destinationType;
 
 var app7 = new Framework7({
   // App root element
@@ -45,6 +47,11 @@ var app = {
     calle2:"",
     comentario2:"",
     dias:"",
+    dia:"",
+    placa:"",
+    calle:"",
+    modelo:"",
+
 
 
     // Application Constructor
@@ -64,6 +71,9 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+
+        pictureSource=navigator.camera.PictureSourceType;
+        destinationType=navigator.camera.DestinationType;
 
 
  console.log("VARIABLE AUTENTICADO:"+window.localStorage.getItem("autenticado"));
@@ -152,11 +162,12 @@ var app = {
     Detencion:function(){
 
       mainView.router.navigate('/detencion/',{animate:true});
-    
+    app7.dialog.alert("Atencion acaba de incurrir en el articulo 5");
     },
     Detencion1:function(){
 
       mainView.router.navigate('/detencion1/',{animate:true});
+
     
     },
     Detencion2:function(){
@@ -164,21 +175,71 @@ var app = {
       mainView.router.navigate('/detencion2/',{animate:true});
     
     },
-   Placa:function(){
+Placa:function(){
 
-      mainView.router.navigate('/placa/',{animate:true});
-    
-    },
-    Placa1:function(){
+  mainView.router.navigate('/placa/',{animate:true});
+  this.nombre2=$$('#nombre2').val();
+  this.numero2=$$('#numero2').val();
+  this.calle2=$$('#calle2').val();
+  this.comentario2=$$('#comentario2').val();
 
-      mainView.router.navigate('/placa1/',{animate:true});
+  app7.request({
+  url: this.hostname+'/mplay/api/semaforo.php',
+  data:{nombre2:this.nombre2,numero2:this.numero2,calle2:this.calle2,comentario2:this.comentario2},
+  method:'POST',
+  crossDomain: true,
+  success:function(data){
+    app7.preloader.hide();
+
+    var objson = JSON.parse(data);
+    app7.dialog.alert("Gracias por comunicarte con el presidente en breve nos comunicaremos contigo");
+    mainView.router.navigate('/home/',{animate:true});
+
+  },
+  error:function(error){
+    app7.preloader.hide();
+    app7.dialog.alert("Esta apunto de levantar un una infraccion");
+    console.log(error);
+
+}
+});
+},
+Placa1:function(){
+
+  mainView.router.navigate('/placa1/',{animate:true});
+  this.nombre2=$$('#nombre2').val();
+  this.numero2=$$('#numero2').val();
+  this.calle2=$$('#calle2').val();
+  this.comentario2=$$('#comentario2').val();
+
+  app7.request({
+  url: this.hostname+'/mplay/api/semaforo.php',
+  data:{nombre2:this.nombre2,numero2:this.numero2,calle2:this.calle2,comentario2:this.comentario2},
+  method:'POST',
+  crossDomain: true,
+  success:function(data){
+  app7.preloader.hide();
+
+  var objson = JSON.parse(data);
+  app7.dialog.alert("Gracias por comunicarte con el presidente en breve nos comunicaremos contigo");
+  mainView.router.navigate('/home/',{animate:true});
+
+  },
+  error:function(error){
+    app7.preloader.hide();
+    app7.dialog.alert("Esta apunto de levantar una infraccion");
+    console.log(error);
+
+}
+});
+},
     
-    },
     Placa2:function(){
 
       mainView.router.navigate('/placa2/',{animate:true});
     
-    },
+   
+},
     Licencia:function(){
 
       mainView.router.navigate('/licencia/',{animate:true});
@@ -209,10 +270,33 @@ var app = {
       mainView.router.navigate('/tarjeta2/',{animate:true});
     
     },
-    Adios:function(){
+    placas:function(){
+ this.dia=$$('#dia').val();
+  this.placa=$$('#placa').val();
+  this.modelo=$$('#modelo').val();
+  this.calle=$$('#calle').val();
 
-      mainView.router.navigate('/home/',{animate:true});
-      app7.dialog.alert("Envio Exitoso");
+  app7.request({
+  url: this.hostname+'/mplay/api/pedro.php',
+  data:{dia:this.dia,placa:this.placa,modelo:this.modelo,calle:this.calle},
+  method:'POST',
+  crossDomain: true,
+  success:function(data){
+    app7.preloader.hide();
+
+    var objson = JSON.parse(data);
+    app7.dialog.alert("Infraccion levantada exitosamente");
+    mainView.router.navigate('/home/',{animate:true});
+
+  },
+  error:function(error){
+    app7.preloader.hide();
+    app7.dialog.alert("Atencion esta apunto de levantar una infraccion");
+    console.log(error);
+
+}
+});
+
     
     },
 
@@ -249,6 +333,7 @@ var app = {
 
     },
 
+
     loginClose:function(){
      
 
@@ -277,3 +362,65 @@ $$(document).on('page:init', '.page[data-name="home"]', function (e) {
       app7.panel.allowOpen = true;
       app7.panel.enableSwipe('left');
 });
+
+
+
+//###Función para Imprimir Documento####//
+function PrintDocument(){
+
+    var fecha = document.getElementById('dia').value;
+    var placa = document.getElementById('placa').value;  
+    var modelo = document.getElementById('modelo').value;
+    var direccion = document.getElementById('calle').value;
+
+    var page = '<strong>Fecha:</strong> '+fecha+' <br><strong>Placa:</strong> '+placa+' <br><strong>Datos del Vehiculo:</strong> '+modelo+'<br><strong>Direccion:</strong> '+direccion;
+    cordova.plugins.printer.print(page, 'Document.html');
+
+}
+
+
+
+
+function capturePhoto() {
+// Take picture using device camera and retrieve image as base64-encoded string
+navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50,
+destinationType: destinationType.DATA_URL });
+}
+
+// This function will execute on button click.
+function getPhoto(source) {
+// Retrieve image file location from specified source
+navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50,
+destinationType: destinationType.FILE_URI,
+sourceType: source });
+}
+
+
+// The function is called on successful retrieval of photo.
+function onPhotoDataSuccess(imageData) {
+var smallImage = document.getElementById('smallImage');
+
+// This function is used for unhide the image elements
+smallImage.style.display = 'block';
+
+// This function is used to display the captured image
+smallImage.src = "data:image/jpeg;base64," + imageData;
+}
+
+
+// This function is called on the successful retrival of image.
+function onPhotoURISuccess(imageURI) {
+var largeImage = document.getElementById('largeImage');
+
+// This function is used for unhiding the image elements
+largeImage.style.display = 'block';
+
+// This function is used to display the captured image.
+largeImage.src = imageURI;
+}
+
+
+function onFail(message) {
+alert('Failed because: ' + message);
+}
+

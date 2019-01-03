@@ -19,34 +19,48 @@
     </div>
 
      <div class="row">
-     <input type="date" name="Name" placeholder="indique la fecha" id="date"></input>
+     <input type="date" name="Name" placeholder="indique la fecha" id="dia"></input>
      </div>
 
      <div class="row">
-     <input type="text" name="Email" placeholder="Indique el nombre de la persona" id="persona" ></input>
+     <input type="text" name="Email" placeholder="Indique el nombre de la persona" id="placa" ></input>
      </div>
 
      <div class="row">
-     <input type="text" name="Subject" placeholder="Por favor indique el modelo, color,año" id="calle" ></input>
+     <input type="text" name="Subject" placeholder="Por favor indique el modelo, color,año" id="modelo" ></input>
      </div>
 
 
      <div class="row">
-     <textarea name="comments" cols="50" rows="7" placeholder="Por favor indique la calle" id="comentario"></textarea>
-   </div>
-    <input type='button' onclick='window.print();' value='Imprimir' /></form> 
-    <br>
-    <br>
+     <textarea name="comments" cols="50" rows="7" placeholder="Por favor indique la calle" id="calle"></textarea>
+   
+ </div>
+<div class="row">
+            
+            <a id="img" class="col button button button-raised button-fill red" href="" onclick="capturePhoto();">
+            <center><i class="fa fa-camera fa-5x"></i></center>
+                Tomar Foto
+            </a>
+
+          </div>
+          
           <div class="row">
-       <input accept="image/*"  type="file" capture/></input> 
-     </div>
-       <br>
-       <br>
-       <br>
+          <center><img style="display:none;width:50%;height:50%;" id="smallImage" src="" /></center>
+          
+          </div>
+          
+      <div class="row">
+      <button class="col button button button-raised button-fill red" onclick="PrintDocument();">Imprimir</button>
+      </div>
+
+    </form> 
+          
+
 
         <div class="row">
-          <button class="col button button button-raised button-fill red" onclick="app.Adios()"><i class="app-icon icon-user-plus">&#xe801;</i>enviar</button>
-     </div>
+          <button class="col button button button-raised button-fill red" onclick="app.placas()"><i class="app-icon icon-user-plus">&#xe801;</i>enviar</button>
+        </div>
+    
     </div>
   </div>
 </div>
