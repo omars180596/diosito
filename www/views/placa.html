@@ -8,7 +8,7 @@
           <span class="ios-only">Back</span>
         </a>
       </div>
-      <div class="title">Lugar No Permitido Placa</div>
+      <div class="title">Sistema Integral para Infracciones</div>
     </div>
   </div>
    <div class="page-content page-content2">
@@ -19,21 +19,61 @@
     </div>
 
      <div class="row">
-     <input type="date" name="Name" placeholder="indique la fecha" id="dia"></input>
+     <input type="date" id="_fecha" name="_fecha" class="form-control" value="<?php echo date('d/m/Y', time()) ?>" required/>
      </div>
+     <div class="row3">
+<select name="Subject" id="_causa" onchange="salta(this.form)">
+<option selected> Causa de la Infraccion
+<option value="Estacionarse en doble Fila">Estacionarse en doble Fila
+<option value="Estacionarse en lugar no permitido">Estacionarse en lugar no permitido
+<option value="Manejar a exceso de velocidad">Manejar a exceso de velocidad
+<option value="No respetar el semaforo">No respetar el semaforo
+<option value="Vuelta en lugar prohibido ">Vuelta en lugar prohibido 
+<option value="Circular en contraflujo">Circular en contraflujo
+<option value="Transportar niños en asientos delanteros">Transportar niños en asientos delanteros
+<option value="Invasion del paso peatonal">Invasion del paso peatonal
+<option value="Falta de uso de cinturon de seguridad">Falta de uso de cinturon de seguridad
+<option value="Uso de distractores">Uso de distractores
+</select>
+</div>
+<br>
+
+  <div class="row3">
+<select name="Subject" id="_lugar" onchange="salta(this.form)">
+<option selected> Lugar de la infraccion
+<option value="Francisco Zarabia">Francisco Zarabia
+<option value="Cuauhtemoc">Cuauhtemoc
+<option value="Moctezuma">Moctezuma
+<option value="Francisco I Madero">Francisco I Madero
+<option value="Miguel Hidalgo">Miguel Hidalgo
+<option value="Boulevard Emilio Sanchez Piedras">Boulevard Emilio Sanchez Piedras
+<option value="Boulevard la Libertad">Boulevard la Libertad
+<option value="Manuel Avila Camacho">Manuel Avila Camacho
+<option value="Aquiles Serdan">Aquiles Serdan
+<option value="Avenida Juarez">Avenida Juarez
+<option value="Avenida 5 de Mayo">Avenida 5 de Mayo
+</select>
+</div>
+<br>
 
      <div class="row">
-     <input type="text" name="Email" placeholder="Indique la placa" id="placa" ></input>
+     <input type="text" name="Subject" placeholder="Caracteristicas de la unidad" id="_caracteristicas" ></input>
      </div>
-
      <div class="row">
-     <input type="text" name="Subject" placeholder="Por favor indique el modelo, color,año" id="modelo" ></input>
+     <input type="text" name="Subject" placeholder="Numero de Placas " id="_placa" ></input>
      </div>
-
-
-     <div class="row">
-     <textarea name="comments" cols="50" rows="7" placeholder="Por favor indique la calle" id="calle"></textarea>
+    <div class="row">
+     <input type="text" name="Subject" placeholder="Nombre de la Persona " id="_persona" ></input>
      </div>
+<div class="row3">
+<select name="Subject" id="_garantia" onchange="salta(this.form)">
+<option selected> Garantia
+<option value="Licencia de Conducir">Licencia de Conducir
+<option value="Placa">Placa
+<option value="Automovil">Automovil
+</select>
+</div>
+<br>
 <div class="row">
             
             <a id="img" class="col button button button-raised button-fill red" href="" onclick="capturePhoto();">
@@ -49,7 +89,7 @@
           </div>
           
       <div class="row">
-      <button class="col button button button-raised button-fill red" onclick="PrintDocument();">Imprimir</button>
+      <button class="col button button button-raised button-fill red" onclick="Preview();">Imprimir</button>
       </div>
 
     </form> 

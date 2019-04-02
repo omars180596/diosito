@@ -83,9 +83,6 @@ var routes = [
     {
       path: '/seguridad/',
       url: 'views/seguridad.html',
-    },{
-       path: '/home/',
-      url: 'views/home.html',
     },
     {
       path: '/login/',
@@ -94,5 +91,13 @@ var routes = [
     {
        path: '/home/',
       url: 'views/home.html',
+    },
+     {
+       path: '/actuaria/',
+      url: 'views/actuaria.html',
+    },
+    {
+       path: '/preview/',
+      url: 'views/preview.html',
     }
   ];

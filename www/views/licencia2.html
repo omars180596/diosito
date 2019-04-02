@@ -19,22 +19,41 @@
     </div>
 
      <div class="row">
-     <input type="date" name="Name" placeholder="indique la fecha" id="dia"></input>
+     <input type="date" id="txtfecha" name="txtfecha" class="form-control" value="<?php echo date('d/m/Y', time()) ?>" required/>
      </div>
+  <div class="row3">
+<select name="Subject" id="modelo" onchange="salta(this.form)">
+<option selected> Lugar de la infraccion
+<option value="aaaa.htm">Francisco Zarabia
+<option value="bbbb.htm">Cuauhtemoc
+<option value="cccc.htm">Moctezuma
+<option value="dddd.htm">Francisco I Madero
+<option value="eeee.htm">Miguel Hidalgo
+<option value="ffff.htm">Boulevard Emilio Sanchez Piedras
+<option value="gggg.htm">Boulevard la Libertad
+<option value="hhhh.htm">Manuel Avila Camacho
+<option value="xxxx.htm">Aquiles Serdan
+<option value="yyyy.htm">Avenida Juarez
+<option value="zzzz.htm">Avenida 5 de Mayo
+</select>
+</div>
+<br>
 
      <div class="row">
-     <input type="text" name="Email" placeholder="Indique el nombre de la persona" id="placa" ></input>
+     <input type="text" name="Subject" placeholder="Caracteristicas de la unidad" id="modelo" ></input>
      </div>
-
      <div class="row">
-     <input type="text" name="Subject" placeholder="Por favor indique el modelo, color,año" id="modelo" ></input>
+     <input type="text" name="Subject" placeholder="Nombre del Conductor o Numero de Placas " id="modelo" ></input>
      </div>
-
-
-     <div class="row">
-     <textarea name="comments" cols="50" rows="7" placeholder="Por favor indique la calle" id="calle"></textarea>
-   
- </div>
+<div class="row3">
+<select name="Subject" id="modelo" onchange="salta(this.form)">
+<option selected> Garantia
+<option value="xxxx.htm">Licencia de Conducir
+<option value="yyyy.htm">Placa
+<option value="zzzz.htm">Automov
+</select>
+</div>
+<br>
 <div class="row">
             
             <a id="img" class="col button button button-raised button-fill red" href="" onclick="capturePhoto();">
